@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Trang Quản Trị</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .content {
+      flex-grow: 1;
+      height: 100%;
+    }
+
+    #map {
+      height: 100%; 
+      width: 100%; 
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Quản Trị</h2>
+    <a href="/">Dashboard</a>
+    <a href="/quanlixe">Quản lý Xe</a>
+    <a href="">Quản lý Điểm Thuê</a>
+    <a href="#">Quản lý Khách Hàng</a>
+    <a href="#">Thống Kê</a>
+    <a href="#">Thông Báo</a>
+    <a href="#">Đăng Xuất</a>
+  </div>
+
+  <div class="content">
+    <div id="map"></div>
+  </div>
+
+  <script>
+    var map = L.map('map').setView([21.0285, 105.8542], 13);  // Toạ độ trung tâm bản đồ (ví dụ: Hà Nội)
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([21.0285, 105.8542]).addTo(map)
+      .bindPopup('Địa chỉ xe 1')
+      .openPopup();
+
+      fetch('/api/locations')
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(location => {
+          const { lat, long, name, address } = location;
+
+          // Thêm marker vào bản đồ
+          L.marker([lat, long])
+            .addTo(map)
+            .bindPopup(`<b>${name}</b><br>${address}<br>Vĩ độ: ${lat}<br> Kinh độ: ${long}`);
+        });
+      })
+      .catch(err => console.error('Lỗi khi lấy dữ liệu:', err));
+
+  </script>
+  
+</body>
+</html>

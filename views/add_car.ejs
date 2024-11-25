@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <h1 class="mb-4">Thêm xe mới</h1>
+    <form action="/cars/add" method="POST">
+      <div class="mb-3">
+        <label for="model" class="form-label">Model</label>
+        <input type="text" name="model" id="model" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="car_brand_id" class="form-label">Thương hiệu</label>
+        <input type="number" name="car_brand_id" id="car_brand_id" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="car_address_id" class="form-label">Địa điểm thuê</label>
+        <input type="number" name="car_address_id" id="car_address_id" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="seats_id" class="form-label">Số ghế</label>
+        <input type="number" name="seats_id" id="seats_id" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="price_per_hour" class="form-label">Giá theo giờ</label>
+        <input type="number" name="price_per_hour" id="price_per_hour" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="price_per_day" class="form-label">Giá theo ngày</label>
+        <input type="number" name="price_per_day" id="price_per_day" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-success">Thêm</button>
+      <a href="/quanlyxe" class="btn btn-secondary">Hủy</a>
+    </form>
+  </div>
+  
